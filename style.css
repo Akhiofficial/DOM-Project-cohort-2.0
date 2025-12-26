@@ -174,7 +174,6 @@ section.allElems {
 
 .todo-list-fullpage .todo-container .addTask form input,
 .todo-list-fullpage .todo-container .addTask form textarea {
-    width: 100%;
     border-radius: 15px;
     border: 1px solid transparent;
     padding: 15px;
@@ -183,19 +182,19 @@ section.allElems {
     color: var(--text-color);
     background-color: var(--primary-color);
     outline: none;
-    resize: none;
     transition: border-color 0.3s;
 }
 
-.todo-list-fullpage .todo-container .addTask form input:focus,
-.todo-list-fullpage .todo-container .addTask form textarea:focus {
-    border-color: var(--tertiary-color);
+.todo-list-fullpage .todo-container .addTask form #taskInput {
+    width: 100%;
 }
+
+
 
 .todo-list-fullpage .todo-container .addTask form button {
     width: 100%;
     height: 50px;
-    border-radius: 20px;
+    border-radius: 10px;
     border: none;
     font-size: 1rem;
     margin-top: 10px;
@@ -256,14 +255,13 @@ section.allElems {
     font-size: 0.9rem;
     font-family: 'aeoniklight';
     color: var(--text-color);
-    opacity: 0.8;
 }
 
 .task button {
     padding: 12px 25px;
     color: var(--primary-color);
     background-color: var(--tertiary-color);
-    border-radius: 50px;
+    border-radius: 20px;
     border: none;
     cursor: pointer;
     transition: all ease 0.2s;
@@ -279,4 +277,44 @@ section.allElems {
 
 .fullElem h2 {
     font-size: 40px;
+}
+
+
+.mark-imp {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    width: 100%;
+    padding: 5px 0px;
+
+}
+
+.mark-imp input {
+    scale: 2;
+}
+
+.mark-imp label {
+    font-size: 1rem;
+    font-family: 'aeoniklight';
+    color: var(--text-color);
+}
+
+.task h5 span {
+    gap: 5px;
+    background-color: red;
+    color: white;
+    font-size: 1rem;
+    font-family: 'aeoniklight';
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.task h5 span.true {
+    opacity: 1;
+}
+
+.task h5 span.false {
+    opacity: 0;
 }

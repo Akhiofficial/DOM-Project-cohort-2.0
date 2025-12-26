@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Productivity Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
 </head>
@@ -56,21 +56,20 @@
                 <div class="addTask">
                     <!-- Input field will go here -->
                     <form action="">
-                        <input type="text" placeholder="Enter task">
+                        <input id="taskInput" type="text" placeholder="Enter task">
                         <textarea placeholder="Enter the details" name="" id=""></textarea>
+                        <div class="mark-imp">
+                            <input type="checkbox" id="check">
+                            <label for="check">Mark as important</label>
+                        </div>
                         <button>Add task</button>
 
                     </form>
                 </div>
                 <div class="allTask">
                     <!-- Task list will go here -->
-                    <div class="task">
-                        <div class="text-val">
-                            <h5>Task Name</h5>
-                            <p>Task Details</p>
-                        </div>
-                        <button>mark as completed</button>
-                    </div>
+
+                    
                 </div>
 
             </div>
