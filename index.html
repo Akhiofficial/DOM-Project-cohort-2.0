@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <main>
+
+        <section class="allElems">
+            <div class="todo elem" id="0">
+                <img src="https://images.pexels.com/photos/17497303/pexels-photo-17497303.png" alt="">
+                <h2>todo</h2>
+
+            </div>
+            <div class="daily elem" id="1">
+
+                <img src="https://images.pexels.com/photos/16044769/pexels-photo-16044769.jpeg" alt="">
+                <h2>daily</h2>
+
+            </div>
+            <div class="pomodoro elem" id="2">
+
+                <img src="https://i.pinimg.com/736x/67/44/5a/67445adf1e83eee1d949df7f44f2baa9.jpg" alt="">
+                <h2>pomodoro</h2>
+
+            </div>
+            <div class="motivation elem" id="3">
+
+                <img src="https://i.pinimg.com/736x/02/3a/fd/023afd17b4436f3f4b23bfac04d2b467.jpg" alt="">
+                <h2>motivation</h2>
+            </div>
+            <div class="goals elem" id="4">
+
+                </button>
+                <img src="./goals.png" alt="">
+                <h2>goals</h2>
+            </div>
+
+        </section>
+
+        <!-- todo list full page -->
+        <div class="fullElem todo-list-fullpage">
+            <button class="back" id="0">
+                <i class="ri-arrow-go-back-line"></i>
+            </button>
+            <h2>Your personalized todo list</h2>
+
+            <div class="todo-container">
+                <div class="addTask">
+                    <!-- Input field will go here -->
+                    <form action="">
+                        <input type="text" placeholder="Enter task">
+                        <textarea placeholder="Enter the details" name="" id=""></textarea>
+                        <button>Add task</button>
+
+                    </form>
+                </div>
+                <div class="allTask">
+                    <!-- Task list will go here -->
+                    <div class="task">
+                        <div class="text-val">
+                            <h5>Task Name</h5>
+                            <p>Task Details</p>
+                        </div>
+                        <button>mark as completed</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="fullElem">
+            <button class="back" id="1">
+                <i class="ri-arrow-go-back-line"></i>
+            </button>
+            <h2>Daily Page</h2>
+        </div>
+
+        <div class="fullElem">
+            <button class="back" id="2">
+                <i class="ri-arrow-go-back-line"></i>
+            </button>
+            <h1>Pomodoro Page</h1>
+        </div>
+
+        <div class="fullElem">
+            <button class="back" id="3">
+                <i class="ri-arrow-go-back-line"></i>
+            </button>
+            <h1>Motivation Page</h1>
+        </div>
+
+        <div class="fullElem">
+            <button class="back" id="4">
+                <i class="ri-arrow-go-back-line"></i>
+            </button>
+            <h1>Goals Page</h1>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
