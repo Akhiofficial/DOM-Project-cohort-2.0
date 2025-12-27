@@ -148,3 +148,24 @@ function dailyPlanner() {
 }
 
 dailyPlanner()
+
+
+
+
+async function motivationalQuotes() {
+    
+    let QuoteContent = document.querySelector('.Quote-content')
+    let QuoteAuthor = document.querySelector('.Quote-author')
+
+    
+
+    let response = await fetch('https://random-quotes-freeapi.vercel.app/api/random')
+    let data = await response.json()
+    console.log(data);
+
+    QuoteContent.innerHTML = data.quote
+    QuoteAuthor.innerHTML = data.author
+    
+}
+
+motivationalQuotes()

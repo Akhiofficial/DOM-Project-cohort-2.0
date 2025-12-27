@@ -335,7 +335,7 @@ section.allElems {
 
 }
 
-.daily-planner-fullpage .day-planner .day-planner-time  {
+.daily-planner-fullpage .day-planner .day-planner-time {
     display: flex;
     align-items: center;
     position: relative;
@@ -370,3 +370,120 @@ section.allElems {
 
 
 /* motivational full page */
+/* motivational full page */
+.motivation-fullpage {
+    position: relative;
+    background-color: var(--primary-color);
+}
+
+.motivation-fullpage .motivational-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quote-card {
+    background: linear-gradient(135deg, #fceae6 0%, #fbd5c6 100%);
+    border-radius: 40px;
+    padding: 40px;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    font-family: 'aeonik', sans-serif;
+    color: #3e2b26;
+    position: relative;
+}
+
+/* Header */
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.date-box {
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 10px 15px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
+}
+
+.date-box .day {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #3e2b26;
+    letter-spacing: 0.5px;
+}
+
+.date-box .date {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #d98e73;
+}
+
+.card-header h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #3e2b26;
+    margin: 0;
+}
+
+/* Body */
+.card-body p {
+    font-size: 1.6rem;
+    line-height: 1.3;
+    font-weight: 400;
+    color: #4a3b36;
+    margin: 20px 0;
+}
+
+/* Footer */
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pagination-dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.pagination-dots span {
+    width: 6px;
+    height: 6px;
+    background-color: #dbbcb3;
+    border-radius: 50%;
+}
+
+.pagination-dots span.active-dot {
+    width: 20px;
+    border-radius: 4px;
+    background-color: #3e2b26;
+}
+
+.Quote-author {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #3e2b26;
+    margin-left: auto;
+    margin-right: 20px;
+    font-family: 'aeonik';
+}
+
+.card-footer i {
+    font-size: 3rem;
+    color: rgba(246, 206, 192, 0.4);
+    transform: scaleX(-1);
+}
