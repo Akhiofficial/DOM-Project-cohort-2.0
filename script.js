@@ -6,6 +6,7 @@ function openFetaures() {
     let allFullPage = document.querySelectorAll('.fullElem')
     let allFullElemsBackBtn = document.querySelectorAll('.back')
 
+    
     // open features
     allElems.forEach((elem) => {
         elem.addEventListener('click', () => {
@@ -26,15 +27,17 @@ function openFetaures() {
 
 openFetaures()
 
-let form = document.querySelector('.todo-list-fullpage .todo-container .addTask form')
-let taskInput = document.querySelector('.todo-list-fullpage .todo-container .addTask form input')
-let taskDetailsInput = document.querySelector('.todo-list-fullpage .todo-container .addTask form textarea')
-let taskCheckBox = document.querySelector('.todo-list-fullpage .todo-container .addTask form #check')
 
 
 
 
 function todoList() {
+
+    let form = document.querySelector('.todo-list-fullpage .todo-container .addTask form')
+    let taskInput = document.querySelector('.todo-list-fullpage .todo-container .addTask form input')
+    let taskDetailsInput = document.querySelector('.todo-list-fullpage .todo-container .addTask form textarea')
+    let taskCheckBox = document.querySelector('.todo-list-fullpage .todo-container .addTask form #check')
+
     var currentTasks = []
 
     if (localStorage.getItem('currentTasks')) {
@@ -83,7 +86,7 @@ function todoList() {
             taskDetails: taskDetailsInput.value,
             imp: taskCheckBox.checked,
         })
-        
+
         console.log(currentTasks);
         renderTasks()
 
@@ -97,4 +100,51 @@ function todoList() {
 
 todoList()
 
+function dailyPlanner() {
+    var dayPlannerData = JSON.parse(localStorage.getItem('dayPlannerData')) || {}
+    var dayPlanner = document.querySelector('.day-planner')
 
+
+    var hours = Array.from({ length: 18 }, (_, idx) =>
+        `${6 + idx}:00 - ${7 + idx}:00`
+    )
+
+    var wholeDaySum = ""
+
+    hours.forEach(function (elem, idx) {
+
+        let savedData = dayPlannerData[idx] || ''
+
+        wholeDaySum += `
+    <div class="day-planner-time">
+                    <p>${elem}</p>
+                    <input id="${idx}" type="text" placeholder="...." value="${savedData}">
+    </div>`
+    })
+
+
+
+
+    dayPlanner.innerHTML = wholeDaySum
+
+
+    var dayPlannerInput = document.querySelectorAll('.day-planner-time input')
+
+    dayPlannerInput.forEach((input) => {
+        input.addEventListener('input', () => {
+
+            dayPlannerData[input.id] = input.value
+            console.log(dayPlannerData);
+
+            localStorage.setItem('dayPlannerData', JSON.stringify(dayPlannerData))
+
+
+        })
+    })
+
+
+
+
+}
+
+dailyPlanner()
