@@ -142,11 +142,30 @@
 
 
         <!-- goals full page -->
-        <div class="fullElem">
+        <div class="fullElem goals-fullpage">
             <button class="back" id="4">
                 <i class="ri-arrow-go-back-line"></i>
             </button>
-            <h1>Goals Page</h1>
+            <h2>My Goals</h2>
+            <div class="goals-wrapper">
+                <div class="goals-form-container">
+                    <form id="addGoalForm">
+                        <div class="input-group">
+                            <input type="text" id="goalInput" placeholder="What's your next milestone?" required>
+                            <select id="categoryInput">
+                                <option value="Personal">Personal</option>
+                                <option value="Work">Work</option>
+                                <option value="Health">Health</option>
+                                <option value="Learning">Learning</option>
+                            </select>
+                        </div>
+                        <button type="submit"><i class="ri-add-line"></i> Create Goal</button>
+                    </form>
+                </div>
+                <div class="goals-container">
+                    <!-- Goals will be rendered here -->
+                </div>
+            </div>
         </div>
 
     </main>

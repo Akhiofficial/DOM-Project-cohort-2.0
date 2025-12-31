@@ -233,7 +233,7 @@ function pomodoroTimer() {
     });
 
 
-
+    // start timer
     function startTimer() {
         if (isRunning) return;
         isRunning = true;
@@ -270,6 +270,109 @@ function pomodoroTimer() {
 
 }
 
-
-
 pomodoroTimer();
+
+function goals() {
+    const goalsForm = document.getElementById('addGoalForm');
+    const goalInput = document.getElementById('goalInput');
+    const categoryInput = document.getElementById('categoryInput');
+    const goalsContainer = document.querySelector('.goals-container');
+
+    let goalsData = JSON.parse(localStorage.getItem('goalsData')) || [];
+
+    function saveGoals() {
+        localStorage.setItem('goalsData', JSON.stringify(goalsData));
+    }
+
+    function renderGoals() {
+        goalsContainer.innerHTML = '';
+        if (goalsData.length === 0) {
+            goalsContainer.innerHTML = '<p style="color: var(--text-color); opacity: 0.7; grid-column: 1/-1; text-align: center;">No goals yet. Start by adding one!</p>';
+            return;
+        }
+
+        goalsData.forEach(goal => {
+            const goalCard = document.createElement('div');
+            goalCard.className = 'goal-card';
+            goalCard.dataset.category = goal.category;
+
+            goalCard.innerHTML = `
+                <div class="goal-header">
+                    <span class="goal-category">${goal.category}</span>
+                    <button class="delete-btn" data-id="${goal.id}"><i class="ri-delete-bin-line"></i></button>
+                </div>
+                <h3 class="goal-title">${goal.title}</h3>
+                <div class="progress-section">
+                    <div class="progress-info">
+                        <span>Progress</span>
+                        <span>${goal.progress}%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" style="width: ${goal.progress}%"></div>
+                    </div>
+                </div>
+                <div class="goal-controls">
+                    <button class="control-btn minus" data-id="${goal.id}"><i class="ri-subtract-line"></i></button>
+                    <button class="control-btn plus" data-id="${goal.id}"><i class="ri-add-line"></i></button>
+                </div>
+            `;
+            goalsContainer.appendChild(goalCard);
+        });
+
+        // Add event listeners to new buttons
+        attachEventListeners();
+    }
+
+    function attachEventListeners() {
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = parseInt(e.currentTarget.dataset.id);
+                goalsData = goalsData.filter(g => g.id !== id);
+                saveGoals();
+                renderGoals();
+            });
+        });
+
+        document.querySelectorAll('.control-btn.minus').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = parseInt(e.currentTarget.dataset.id);
+                const goal = goalsData.find(g => g.id === id);
+                if (goal && goal.progress > 0) {
+                    goal.progress = Math.max(0, goal.progress - 10);
+                    saveGoals();
+                    renderGoals();
+                }
+            });
+        });
+
+        document.querySelectorAll('.control-btn.plus').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = parseInt(e.currentTarget.dataset.id);
+                const goal = goalsData.find(g => g.id === id);
+                if (goal && goal.progress < 100) {
+                    goal.progress = Math.min(100, goal.progress + 10);
+                    saveGoals();
+                    renderGoals();
+                }
+            });
+        });
+    }
+
+    goalsForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const newGoal = {
+            id: Date.now(),
+            title: goalInput.value,
+            category: categoryInput.value,
+            progress: 0
+        };
+        goalsData.push(newGoal);
+        saveGoals();
+        renderGoals();
+        goalInput.value = '';
+    });
+
+    renderGoals();
+}
+
+goals();
