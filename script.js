@@ -6,7 +6,7 @@ function openFetaures() {
     let allFullPage = document.querySelectorAll('.fullElem')
     let allFullElemsBackBtn = document.querySelectorAll('.back')
 
-    
+
     // open features
     allElems.forEach((elem) => {
         elem.addEventListener('click', () => {
@@ -153,11 +153,11 @@ dailyPlanner()
 
 
 async function motivationalQuotes() {
-    
+
     let QuoteContent = document.querySelector('.Quote-content')
     let QuoteAuthor = document.querySelector('.Quote-author')
 
-    
+
 
     let response = await fetch('https://random-quotes-freeapi.vercel.app/api/random')
     let data = await response.json()
@@ -165,7 +165,111 @@ async function motivationalQuotes() {
 
     QuoteContent.innerHTML = data.quote
     QuoteAuthor.innerHTML = data.author
-    
+
 }
 
 motivationalQuotes()
+
+function pomodoroTimer() {
+    const timerDisplay = document.querySelector('.pomodoro-container .timer-display h1');
+    const startBtn = document.querySelector('.pomodoro-container .start-btn');
+    const tabs = document.querySelectorAll('.pomodoro-container .timer-tabs .tab');
+    const fullPage = document.querySelector('.fullElem.pomodoro-fullpage');
+    const resetBtn = document.querySelector('.pomodoro-container .reset-btn');
+
+
+
+    let timeLeft = 25 * 60;
+    let timerId = null;
+    let isRunning = false;
+
+    // Initialize display
+    updateDisplay();
+
+    // Tab switching
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Update active class
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            // Reset timer based on tab
+            const minutes = parseInt(tab.dataset.time);
+            timeLeft = minutes * 60;
+            updateDisplay();
+
+            // Stop timer if running
+            stopTimer();
+            startBtn.textContent = 'START';
+            startBtn.classList.remove('active');
+
+            // Update background color based on mode (optional visual feedback)
+            if (minutes === 25) fullPage.style.backgroundColor = '#151e27';
+            else if (minutes === 5) fullPage.style.backgroundColor = '#2d485d';
+            else fullPage.style.backgroundColor = '#572d67ff';
+        });
+    });
+
+    // Start/Stop button
+    startBtn.addEventListener('click', () => {
+        if (isRunning) {
+            stopTimer();
+            startBtn.textContent = 'START';
+            startBtn.classList.remove('active');
+        } else {
+            startTimer();
+            startBtn.textContent = 'PAUSE';
+            startBtn.classList.add('active');
+        }
+    });
+
+    // reset button
+    resetBtn.addEventListener('click', () => {
+        stopTimer();
+        startBtn.textContent = 'START';
+        startBtn.classList.remove('active');
+        timeLeft = 25 * 60;
+        updateDisplay();
+    });
+
+
+
+    function startTimer() {
+        if (isRunning) return;
+        isRunning = true;
+        timerId = setInterval(() => {
+            timeLeft--;
+            updateDisplay();
+            if (timeLeft === 0) {
+                stopTimer();
+                alert('Time is up!');
+                // Reset to current tab's time
+                const activeTab = document.querySelector('.pomodoro-container .timer-tabs .tab.active');
+                timeLeft = parseInt(activeTab.dataset.time) * 60;
+                updateDisplay();
+                startBtn.textContent = 'START';
+                startBtn.classList.remove('active');
+            }
+        }, 1000);
+    }
+
+    function stopTimer() {
+        clearInterval(timerId);
+        isRunning = false;
+    }
+
+    function updateDisplay() {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+        // Update document title
+        document.title = `${minutes}:${seconds.toString().padStart(2, '0')} - Pomodoro`;
+    }
+
+
+}
+
+
+
+pomodoroTimer();

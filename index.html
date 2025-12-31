@@ -25,20 +25,19 @@
                 <h2>daily</h2>
 
             </div>
-            <div class="pomodoro elem" id="2">
+            <div class="pomodoro elem pomodoro-fullpage" id="2">
 
                 <img src="https://i.pinimg.com/736x/67/44/5a/67445adf1e83eee1d949df7f44f2baa9.jpg" alt="">
                 <h2>pomodoro</h2>
 
             </div>
-            <div class="motivation elem" id="3">
+            <div class="motivation elem motivation-fullpage" id="3">
 
                 <img src="https://i.pinimg.com/736x/02/3a/fd/023afd17b4436f3f4b23bfac04d2b467.jpg" alt="">
                 <h2>motivation</h2>
             </div>
-            <div class="goals elem" id="4">
+            <div class="goals elem goals-fullpage" id="4">
 
-                </button>
                 <img src="./goals.png" alt="">
                 <h2>goals</h2>
             </div>
@@ -85,12 +84,30 @@
         </div>
 
         <!-- pomodoro full page -->
-        <div class="fullElem  pomodoro-fullpage">
+        <div class="fullElem pomodoro-fullpage">
             <button class="back" id="2">
                 <i class="ri-arrow-go-back-line"></i>
             </button>
-            <h2>Pomodoro Page</h2>
+
+            <div class="pomodoro-container">
+                <div class="timer-card">
+                    <div class="timer-tabs">
+                        <button class="tab active" data-time="25">Pomodoro</button>
+                        <button class="tab" data-time="5">Short Break</button>
+                        <button class="tab" data-time="15">Long Break</button>
+                    </div>
+                    <div class="timer-display">
+                        <h1>25:00</h1>
+                    </div>
+                    <div class="timer-btns">
+                        <button class="start-btn">START</button>
+                        <button class="reset-btn">RESET</button>
+                    </div>
+                </div>
+
+            </div>
         </div>
+
 
         <!-- motivation full page -->
         <div class="fullElem motivation-fullpage">
@@ -114,7 +131,7 @@
                         <div class="pagination-dots">
                             <span class="active-dot"></span>
                             <span></span>
-                        </div>      
+                        </div>
                         <h5 class="Quote-author"></h5>
                         <i class="ri-double-quotes-r"></i>
                     </div>
