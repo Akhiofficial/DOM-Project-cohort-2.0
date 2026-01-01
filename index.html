@@ -7,42 +7,105 @@
     <title>Productivity Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="./favicon/favicon-and.png" type="image/x-icon">
 </head>
 
 <body>
 
     <main>
+        <div class="dashboard-layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="logo">
+                    <i class="ri-mind-map"></i>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="#" class="active"><i class="ri-home-4-line"></i></a>
+                    <a href="#"><i class="ri-calendar-event-line"></i></a>
+                    <a href="#"><i class="ri-list-check"></i></a>
+                    <a href="#"><i class="ri-bar-chart-box-line"></i></a>
+                </nav>
+                <div class="settings">
+                    <i class="ri-settings-4-line"></i>
+                </div>
+            </aside>
 
-        <section class="allElems">
-            <div class="todo elem" id="0">
-                <img src="https://images.pexels.com/photos/17497303/pexels-photo-17497303.png" alt="">
-                <h2>todo</h2>
+            <!-- Main Content -->
+            <section class="main-content">
+                <header class="dashboard-header">
+                    <div class="header-left">
+                        <h1 id="greeting">Good Morning</h1>
+                        <p id="currentDate">Fetching date...</p>
+                    </div>
+                    <div class="header-right">
+                        <div class="search-box">
+                            <i class="ri-search-line"></i>
+                            <input type="text" placeholder="Search task...">
+                        </div>
+                        <div class="profile">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
+                                alt="Profile">
+                        </div>
+                    </div>
+                </header>
 
-            </div>
-            <div class="daily elem" id="1">
+                <div class="dashboard-grid">
+                    <!-- Weather Card -->
+                    <div class="grid-card weather-card">
+                        <div class="weather-info">
+                            <span class="location"><i class="ri-map-pin-line"></i> <span
+                                    id="location">Loading...</span></span>
+                            <div class="temp-box">
+                                <h2 id="temp">--°</h2>
+                                <i id="weatherIcon" class="ri-sun-line"></i>
+                            </div>
+                            <p id="condition">Weather condition</p>
+                        </div>
+                    </div>
 
-                <img src="https://images.pexels.com/photos/16044769/pexels-photo-16044769.jpeg" alt="">
-                <h2>daily</h2>
+                    <!-- Existing Features renamed to grid-card but keeping elem class for JS -->
+                    <div class="grid-card elem todo-card" id="0">
+                        <div class="card-content">
+                            <h3>Todo List</h3>
+                            <p>Stay Organized</p>
+                            <div class="icon-bg"><i class="ri-pencil-line"></i></div>
+                        </div>
+                    </div>
 
-            </div>
-            <div class="pomodoro elem pomodoro-fullpage" id="2">
+                    <div class="grid-card elem daily-card" id="1">
+                        <div class="card-content">
+                            <h3>Daily Planner</h3>
+                            <p>Plan your day</p>
+                            <div class="icon-bg"><i class="ri-calendar-line"></i></div>
+                        </div>
+                    </div>
 
-                <img src="https://i.pinimg.com/736x/67/44/5a/67445adf1e83eee1d949df7f44f2baa9.jpg" alt="">
-                <h2>pomodoro</h2>
+                    <div class="grid-card elem pomodoro-card pomodoro-fullpage-trigger" id="2">
+                        <div class="card-content">
+                            <h3>Pomodoro</h3>
+                            <p>Focus Timer</p>
+                            <div class="icon-bg"><i class="ri-timer-line"></i></div>
+                        </div>
+                    </div>
 
-            </div>
-            <div class="motivation elem motivation-fullpage" id="3">
+                    <div class="grid-card elem motivation-card motivation-fullpage-trigger" id="3">
+                        <div class="card-content">
+                            <h3>Motivation</h3>
+                            <p>Daily Quotes</p>
+                            <div class="icon-bg"><i class="ri-double-quotes-l"></i></div>
+                        </div>
+                    </div>
 
-                <img src="https://i.pinimg.com/736x/02/3a/fd/023afd17b4436f3f4b23bfac04d2b467.jpg" alt="">
-                <h2>motivation</h2>
-            </div>
-            <div class="goals elem goals-fullpage" id="4">
-
-                <img src="./goals.png" alt="">
-                <h2>goals</h2>
-            </div>
-
-        </section>
+                    <div class="grid-card elem goals-card goals-fullpage-trigger" id="4">
+                        <div class="card-content">
+                            <h3>Goals</h3>
+                            <p>Track Milestones</p>
+                            <div class="icon-bg"><i class="ri-flag-line"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
 
         <!-- todo list full page -->
         <div class="fullElem todo-list-fullpage">
@@ -114,7 +177,7 @@
             <button class="back" id="3">
                 <i class="ri-arrow-go-back-line"></i>
             </button>
-            <h2>Motivation Page</h2>
+            <h2>Today's Motivation</h2>
             <div class="motivational-container">
                 <div class="quote-card">
                     <div class="card-header">
@@ -122,7 +185,7 @@
                             <span class="day">MON</span>
                             <span class="date">10</span>
                         </div>
-                        <h3>Quotes for the day</h3>
+                        <h3>Quotes for the day</h3>9989
                     </div>
                     <div class="card-body">
                         <p class="Quote-content"></p>
@@ -138,7 +201,6 @@
                 </div>
             </div>
         </div>
-
 
 
         <!-- goals full page -->

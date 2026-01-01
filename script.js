@@ -11,15 +11,20 @@ function openFetaures() {
     allElems.forEach((elem) => {
         elem.addEventListener('click', () => {
             console.log(elem.id);
-            allFullPage[elem.id].style.display = 'block'
-
+            // Hide all first (optional, but good practice if not fully covering)
+            allFullPage.forEach(page => page.classList.remove('active'));
+            allFullPage[elem.id].classList.add('active');
         })
     })
 
     // back btn function
     allFullElemsBackBtn.forEach((backBtn) => {
         backBtn.addEventListener('click', () => {
-            allFullPage[backBtn.id].style.display = 'none'
+            // More robust: find the parent full page directly
+            const fullPage = backBtn.closest('.fullElem');
+            if (fullPage) {
+                fullPage.classList.remove('active');
+            }
         })
     })
 
@@ -376,3 +381,113 @@ function goals() {
 }
 
 goals();
+
+function initDashboard() {
+    updateGreeting();
+    fetchWeather();
+
+    // Update date
+    const dateElement = document.getElementById('currentDate');
+    const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
+    dateElement.textContent = new Date().toLocaleDateString('en-US', options);
+}
+
+function updateGreeting() {
+    const greetingElement = document.getElementById('greeting');
+    const hour = new Date().getHours();
+    let greeting = 'Good Morning';
+
+    if (hour >= 12 && hour < 17) {
+        greeting = 'Good Afternoon';
+    } else if (hour >= 17) {
+        greeting = 'Good Evening';
+    }
+
+    greetingElement.textContent = `${greeting}, User`;
+}
+
+async function fetchWeather() {
+    const tempElement = document.getElementById('temp');
+    const conditionElement = document.getElementById('condition');
+    const locationElement = document.getElementById('location');
+    const iconElement = document.getElementById('weatherIcon');
+
+    // Default chikhldhara if geolocation fails or denied
+    let lat = 21.404504;
+    let lon = 77.316717;
+
+    try {
+        if (navigator.geolocation) {
+            try {
+                const position = await new Promise((resolve, reject) => {
+                    navigator.geolocation.getCurrentPosition(resolve, reject);
+                });
+                lat = position.coords.latitude;
+                lon = position.coords.longitude;
+                locationElement.textContent = 'Local Weather';
+            } catch (error) {
+                console.log('Location access denied, using default.');
+                locationElement.textContent = 'Chikhldhara, India';
+            }
+        }
+
+        const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,is_day`);
+        const data = await response.json();
+
+        const current = data.current;
+        const temp = Math.round(current.temperature_2m);
+        const code = current.weather_code;
+        const isDay = current.is_day;
+
+        console.log(code );
+        
+
+        tempElement.textContent = `${temp}°`;
+
+        // Map WMO codes to conditions and icons
+        const weatherInfo = getWeatherInfo(code, isDay);
+        conditionElement.textContent = weatherInfo.condition;
+        iconElement.className = weatherInfo.icon;
+
+    } catch (error) {
+        console.error('Error fetching weather:', error);
+        conditionElement.textContent = 'Unavailable';
+    }
+    
+}
+
+function getWeatherInfo(code, isDay) {
+    // Simple WMO code mapping
+    // 0: Clear, 1-3: Cloudy, 45,48: Fog, 51-67: Drizzle/Rain, 71-77: Snow, 95-99: Thunderstorm
+    let condition = 'Unknown';
+    let icon = 'ri-question-line';
+
+    if (code === 0) {
+        condition = 'Clear Sky';
+        icon = isDay ? 'ri-sun-line' : 'ri-moon-line';
+    } else if (code >= 1 && code <= 3) {
+        condition = 'Partly Cloudy';
+        icon = isDay ? 'ri-sun-cloudy-line' : 'ri-moon-cloudy-line';
+    } else if (code >= 45 && code <= 48) {
+        condition = 'Foggy';
+        icon = 'ri-mist-line';
+    } else if (code >= 51 && code <= 67) {
+        condition = 'Rainy';
+        icon = 'ri-rainy-line';
+    } else if (code >= 71 && code <= 77) {
+        condition = 'Snowy';
+        icon = 'ri-snowy-line';
+    } else if (code >= 80 && code <= 82) {
+        condition = 'Heavy Rain';
+        icon = 'ri-heavy-showers-line';
+    } else if (code >= 95) {
+        condition = 'Thunderstorm';
+        icon = 'ri-thunderstorms-line';
+    }
+
+    return { condition, icon };
+}
+
+
+
+initDashboard();
